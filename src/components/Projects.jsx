@@ -95,7 +95,7 @@ function ProjectCard({ project, index, featured }) {
             <a
               href={project.github}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="text-muted hover:text-cyan-500 transition-colors"
               aria-label="GitHub"
             >
@@ -106,7 +106,7 @@ function ProjectCard({ project, index, featured }) {
             <a
               href={project.live}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="text-muted hover:text-cyan-500 transition-colors"
               aria-label="Live Demo"
             >
@@ -132,6 +132,21 @@ function ProjectCard({ project, index, featured }) {
           </span>
         ))}
       </div>
+
+      {/* View on GitHub Button */}
+      {project.github && (
+        <div className="mt-5 pt-3">
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-lg border border-cyan-500/40 text-cyan-600 dark:text-cyan-400 hover:text-white hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-600 hover:border-transparent transition-all duration-300 shadow-sm hover:shadow-cyan-500/20 hover:-translate-y-0.5"
+          >
+            <GithubIcon size={14} />
+            <span>View on GitHub</span>
+          </a>
+        </div>
+      )}
     </motion.div>
   );
 }

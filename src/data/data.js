@@ -162,7 +162,7 @@ export const projects = [
       "A Python-based network scanning tool designed to identify hosts, open ports, and available network services.",
     tech: ["Python", "Nmap", "Networking", "Kali Linux"],
     status: "Completed",
-    github: "YOUR_GITHUB_LINK",
+    github: null,
     live: null,
     image: null,
     featured: false,
