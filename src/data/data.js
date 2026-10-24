@@ -206,7 +206,6 @@ export const blogPosts = [
     excerpt:
       "My first hands-on experience with Kali Linux began during my EdiGlobe Cyber Security internship in October 2025. From setting it up in VMware to exploring tools like Nmap, OWASP ZAP, and Nikto, this was my first step toward understanding cybersecurity beyond theory and getting practical with security tools.",
     date: "September 26, 2026",
-    readTime: "5 min read",
     tags: ["Kali Linux", "Cybersecurity", "Linux", "Penetration Testing"],
     link: "https://yashdsingh.hashnode.dev/my-first-hands-on-experience-with-kali-linux",
   },
@@ -215,7 +214,6 @@ export const blogPosts = [
     excerpt:
       "Cryptography is one of the technologies quietly protecting our digital lives. In this article, I explore the fundamentals of encryption, hashing, symmetric and asymmetric cryptography, and how these concepts are used to protect information in the digital world.",
     date: "September 26, 2026",
-    readTime: "8 min read",
     tags: ["Cryptography", "Cybersecurity", "Computer Science", "Technology"],
     link: "https://yashdsingh.hashnode.dev/how-does-cryptography-actually-protect-our-data",
   },

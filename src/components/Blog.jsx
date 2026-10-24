@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Clock, Tag, ArrowUpRight } from 'lucide-react';
+import { Tag, ArrowUpRight } from 'lucide-react';
 
 export default function Blog({ posts }) {
   return (
@@ -21,21 +21,19 @@ export default function Blog({ posts }) {
               key={post.title}
               href={post.link ?? '#'}
               target={post.link && post.link !== '#' ? '_blank' : undefined}
-              rel="noreferrer"
+              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
               className="glass-card-hover p-6 flex flex-col group cursor-pointer block"
             >
-              {/* Read time & date */}
-              <div className="flex items-center justify-between text-faint text-xs mb-4">
-                <span>{post.date}</span>
-                <span className="flex items-center gap-1">
-                  <Clock size={12} />
-                  {post.readTime}
-                </span>
-              </div>
+              {/* Date */}
+              {post.date && (
+                <div className="text-faint text-xs mb-4">
+                  <span>{post.date}</span>
+                </div>
+              )}
 
               {/* Title */}
               <h3 className="text-base font-bold text-body mb-3 group-hover:text-cyan-500 transition-colors leading-snug flex items-start gap-2">
