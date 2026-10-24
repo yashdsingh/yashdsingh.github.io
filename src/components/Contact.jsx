@@ -1,31 +1,51 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Send, MapPin, CheckCircle } from 'lucide-react';
+import { Mail, Send, MapPin, CheckCircle, AlertCircle } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, TwitterIcon } from './SocialIcons';
 
 export default function Contact({ info }) {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState('idle'); // idle | sending | sent | error
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('sending');
-    // ──────────────────────────────────────────────
-    // TODO: Wire this up to your preferred backend.
-    // Options: Formspree, EmailJS, your own API, etc.
-    // Example with Formspree:
-    //   const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(form),
-    //   });
-    //   if (res.ok) setStatus('sent'); else setStatus('error');
-    // ──────────────────────────────────────────────
-    // Simulate a successful send for now:
-    setTimeout(() => {
-      setStatus('sent');
-      setForm({ name: '', email: '', message: '' });
-    }, 1200);
+    setErrorMessage('');
+
+    try {
+      const recipient = info?.email || 'yashdsingh9@outlook.com';
+      const res = await fetch(`https://formsubmit.co/ajax/${recipient}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          message: form.message,
+          _subject: `New Portfolio Message from ${form.name}`,
+          _template: 'table',
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && (data.success === 'true' || data.success === true)) {
+        setStatus('sent');
+        setForm({ name: '', email: '', message: '' });
+      } else {
+        setStatus('error');
+        setErrorMessage(
+          data.message || 'Something went wrong. Please try again or email directly.'
+        );
+      }
+    } catch (err) {
+      console.error('Contact form submission error:', err);
+      setStatus('error');
+      setErrorMessage('Network error. Please try again or reach out directly via email.');
+    }
   };
 
   const socials = [
@@ -82,7 +102,7 @@ export default function Contact({ info }) {
                     key={label}
                     href={href ?? '#'}
                     target={href?.startsWith('http') ? '_blank' : undefined}
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     aria-label={label}
                     className="w-12 h-12 glass-card-hover flex items-center justify-center rounded-xl text-muted hover:text-cyan-500 transition-colors"
                   >
@@ -142,6 +162,14 @@ export default function Contact({ info }) {
                     className="form-input resize-none"
                   />
                 </div>
+
+                {status === 'error' && (
+                  <div className="flex items-start gap-2.5 p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-sm">
+                    <AlertCircle size={18} className="flex-shrink-0 mt-0.5 text-red-400" />
+                    <span>{errorMessage || 'Failed to send message. Please try again or email directly.'}</span>
+                  </div>
+                )}
+
                 <button
                   type="submit"
                   disabled={status === 'sending'}
@@ -161,7 +189,7 @@ export default function Contact({ info }) {
                 </button>
 
                 <p className="text-xs text-faint text-center">
-                  ⚙️ Connect this form to Formspree or EmailJS to receive real emails.
+                  🔒 Messages are sent directly to Yash's inbox.
                 </p>
               </form>
             )}
