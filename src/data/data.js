@@ -133,6 +133,7 @@ export const projects = [
     live: null,
     image: null,
     featured: true,
+    isPrivate: false,
   },
   {
     title: "Church Subscription Management System",
@@ -140,10 +141,11 @@ export const projects = [
       "A subscription management system for tracking church members, monthly payments, pending amounts, advance payments, and member records.",
     tech: ["Next.js", "React", "Firebase", "Firestore", "Firebase Auth"],
     status: "Ongoing",
-    github: "https://github.com/yashdsingh/naini-community-church-app",
+    github: null,
     live: null,
     image: null,
     featured: true,
+    isPrivate: true,
   },
   {
     title: "Church Song Book",
@@ -155,6 +157,7 @@ export const projects = [
     live: null,
     image: null,
     featured: false,
+    isPrivate: true,
   },
   {
     title: "Network Scanner",
@@ -166,6 +169,7 @@ export const projects = [
     live: null,
     image: null,
     featured: false,
+    isPrivate: true,
   },
   {
     title: "Encrypted File Transfer",
@@ -177,6 +181,7 @@ export const projects = [
     live: null,
     image: null,
     featured: false,
+    isPrivate: true,
   },
 ];
 

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ExternalLink, Star } from 'lucide-react';
+import { ExternalLink, Star, Lock } from 'lucide-react';
 import { GithubIcon } from './SocialIcons';
 
 export default function Projects({ projects }) {
@@ -90,7 +90,7 @@ function ProjectCard({ project, index, featured }) {
             </span>
           )}
         </div>
-        <div className="flex gap-2 ml-2 flex-shrink-0 pt-0.5">
+        <div className="flex items-center gap-2 ml-2 flex-shrink-0 pt-0.5">
           {project.github && (
             <a
               href={project.github}
@@ -113,6 +113,15 @@ function ProjectCard({ project, index, featured }) {
               <ExternalLink size={18} />
             </a>
           )}
+          {!project.github && !project.live && (
+            <span
+              className="text-muted/50 p-0.5"
+              title="Private Repository"
+              aria-label="Private Repository"
+            >
+              <Lock size={15} />
+            </span>
+          )}
         </div>
       </div>
 
@@ -133,9 +142,9 @@ function ProjectCard({ project, index, featured }) {
         ))}
       </div>
 
-      {/* View on GitHub Button */}
-      {project.github && (
-        <div className="mt-5 pt-3">
+      {/* View on GitHub Button or Private Badge */}
+      <div className="mt-5 pt-3">
+        {project.github ? (
           <a
             href={project.github}
             target="_blank"
@@ -145,8 +154,16 @@ function ProjectCard({ project, index, featured }) {
             <GithubIcon size={14} />
             <span>View on GitHub</span>
           </a>
-        </div>
-      )}
+        ) : (
+          <span
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-500/10 text-muted border border-slate-500/20 select-none cursor-default"
+            title="Source code is private"
+          >
+            <Lock size={13} className="text-muted" />
+            <span>Private Repository</span>
+          </span>
+        )}
+      </div>
     </motion.div>
   );
 }
